@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        class ConectionPrototipe {
+            constructor(proto, nombre, document, parameters, state, data) {
+                this.proto = proto;
+                this.nombre = nombre;
+                this.document = document;
+                this.parameters = parameters;
+                this.state = state;
+                this.state = data;
+                return this.clone();
+            }
+            clone() {
+                let connection = new Connection();
+                connection.driver = this.proto.driver;
+                connection.server = this.proto.server;
+                connection.path = this.proto.path;
+                connection.type = this.proto.type;
+                connection.nombre = this.nombre;
+                connection.document = this.document;
+                connection.parameters = this.parameters;
+                connection.state = this.state;
+                connection.data = this.data;
+                return connection;
+            }
+        }
+
+        class Connection {
+            constructor(server, driver, path, type) {
+                this.server = server;
+                this.driver = driver;
+                this.path = path;
+                this.type = type;
+            }
+            getConection() {
+                return `${this.driver}://server=${this.server};path=${this.path};type=${this.type};`
+            }
+        }
+
+        let ConnectionSqlServerPrototype =
+            new Connection("http", "Ibero", "mrooms", "Websockets");
+
+        let ConnectionSqlServer = new ConectionPrototipe(ConnectionSqlServerPrototype, "Ericson", "Json", "esuare13", "Activo", "hola como estas");
+        console.log(ConnectionSqlServerPrototype);
+        console.log(ConnectionSqlServer);
+    </script>
+</body>
+
+</html>
